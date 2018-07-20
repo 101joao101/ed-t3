@@ -1,11 +1,12 @@
 #ifndef ORDENACAO_H
 #define ORDENACAO_H
-#include "Estoque.h"
+#include "Vector.h"
 #include "Lista.h"
 
-typedef double (*Mat)(Posic);
+typedef double (*Mat)(Item);
+typedef int (*Compare)(Vector vet, int i, int j);
 
-Estoque ltov(Lista list, Estoque e, int size);
-void heapsort(Lista list, Mat matx);
+Vector ltov(Lista list, Mat matx, Mat maty);
+void heapsort(Vector vet, Compare cmp);
 
 #endif
