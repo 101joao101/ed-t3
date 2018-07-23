@@ -4,11 +4,12 @@
 
 	typedef void *Vector;
 
-Vector creatVector(int n);
+Vector createVector(int n);
 int getSizeVector(Vector vet);
 int getQntd(Vector vet);
-Posic getObj(Vector vet, int n);
+Item getObjVector(Vector vet, int n);
 Posic addVector(Vector vet, Item i, int n);
+void swap(Vector vet, int i, int j);
 void freeVector(Vector vet);
 
 #endif

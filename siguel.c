@@ -62,15 +62,12 @@ int main (int argc, char **argv){
 	rewind(svgMain);
 	svgH += 10.0;
 	svgW += 10.0;
-	printf("h: %f w: %f\n", svgH, svgW);
-	getchar();
 	fprintf(svgMain, "<svg width=\"%f\" height=\"%f\">\n", svgW, svgH);
 	str = funcIn(argc, argv, "-q");	
 	if (str != NULL){
 		str4 = funcSvgQry(argc, argv);
 		svgQry = fopen(str4, "w");
 		funcFree(&str4);
-		printf("h: %f, w: %f\n", svgH, svgW);
 		fprintf(svgQry, "                                                                          ");
 		leitura(argc, argv, str, &svgH, &svgW, &svgQry, listCir, listRet, listQua, listSem, listHid, listTor);
 		funcFree(&str);
@@ -79,8 +76,6 @@ int main (int argc, char **argv){
 		rewind(svgQry);
 		svgH += 10.0;
 		svgW += 10.0;
-		printf("h: %f, w: %f\n", svgH, svgW);
-		getchar();
 		fprintf(svgQry, "<svg width=\"%f\" height=\"%f\">\n", svgW, svgH);
 		fclose(svgQry);
 	}

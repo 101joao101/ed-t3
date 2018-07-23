@@ -13,7 +13,7 @@ typedef struct{
 }head;
 
 
-Vector creatVector(int n){
+Vector createVector(int n){
 	int i;
 	head *newHead;
 	vector *newVet;
@@ -41,11 +41,11 @@ int getSizeVector(Vector vet){
 	return newVector->size;
 }
 
-Posic getObjVector(Vector vet, int n){
+Item getObjVector(Vector vet, int n){
 	head *cabeca;
 	vector *vetor;
 	cabeca = (head*)vet;
-	vet = cabeca->vet;
+	vetor = cabeca->vet;
 	if (vetor[n-1].obj == NULL)
 		return NULL;
 	else
@@ -56,13 +56,23 @@ Posic addVector(Vector vet,	Item obj, int n){
 	head *cabeca;
 	vector *vetor;
 	cabeca = (head*)vet;
-	vet = cabeca->vet;
+	vetor = cabeca->vet;
 	if (vetor[n-1].obj == NULL){
 		vetor[n-1].obj = obj;
 		return vetor[n-1].obj;
 	} else {
 		return NULL;
 	}
+}
+
+void swap(Vector vet, int i, int j){
+	head *cabeca;
+	vector *vetor, v;
+	cabeca = (head*)vet;
+	vetor = cabeca->vet;
+	v.obj = vetor[i-1].obj;
+	vetor[i-1].obj = vetor[j-1].obj;
+	vetor[j-1].obj = v.obj;
 }
 
 void freeVector(Vector vet){

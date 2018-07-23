@@ -4,9 +4,9 @@
 #include "Lista.h"
 
 typedef double (*Mat)(Item);
-typedef int (*Compare)(Vector vet, int i, int j);
+typedef int (*Compare)(Vector vet, int i, int j, char p);
 
 Vector ltov(Lista list, Mat matx, Mat maty);
-void heapsort(Vector vet, Compare cmp);
+void heapSort(Vector vet, Compare cmp);
 
 #endif

@@ -11,6 +11,9 @@
 #include "Hidrante.h"
 #include "Lista.h"
 #include "Svg.h"
+#include "Vector.h"
+#include "Ordenacao.h"
+#include "Elemento.h"
 
 void funcFree(char **a){
 	if (a == NULL){
@@ -1047,7 +1050,16 @@ void leitura(int argc, char *argv[], char *arqIn, double *svgH, double *svgW, FI
 				fprintf(txt, "Quadra %lf %lf\n", getQuadraX(q1), getQuadraY(q1));
 			}
 		}else if (strcmp(word, "crb?") == 0){
-			
+			Vector vetor;
+			Posic p;
+			Elemento e;
+			vetor = ltov(listTor, getTorreX, getTorreY);
+			heapSort(vetor, cmp);
+			printf("x:\n");
+			for (i = 1; i<= getSizeVector(vetor); i++){
+				e = getObjVector(vetor, i);
+				printf("%f\n", getElementoX(e));
+			}
 		}
 	}
 	funcFree(&line);

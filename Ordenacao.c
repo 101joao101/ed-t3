@@ -6,7 +6,6 @@
 Vector ltov(Lista list, Mat matx, Mat maty){
     int i;
     Posic p;
-    Item i;
     Elemento e;
     Vector vet;
     vet = createVector(length(list));
@@ -19,10 +18,34 @@ Vector ltov(Lista list, Mat matx, Mat maty){
     return vet;
 }
 
-void principal(Lista list, Mat matx){
-
+void heap(Vector vet, int size, int i, Compare cmp, char coodn){
+    int l, r, largest, var;
+    largest = i;
+    l = 2*i;
+    r = 2*i + 1;
+    if (l < size){
+        var = cmp(vet, l, largest, coodn);
+        if (var == -1)
+            largest = l;
+    }
+    if (r < size){
+        var = cmp(vet, r, largest, coodn);
+        if (var == -1)
+            largest = r;
+    }
+    if (i != largest){
+        swap(vet, i, largest);
+        heap(vet, size, largest, cmp, coodn);
+    }
 }
 
-void heapsort(Vector vet, Compare cmp){
-    
+void heapSort(Vector vet, Compare cmp, char coodn){
+    int i;
+    for (i = getSizeVector(vet)/2; i > 0; i--){
+        heap(vet, getSizeVector(vet), i, cmp, coodn);
+    }
+    for (i = getSizeVector(vet); i>0; i--){
+        swap(vet, 1, i);
+        heap(vet, i, 1, cmp, coodn);
+    }
 }
