@@ -14,6 +14,7 @@
 #include "Vector.h"
 #include "Ordenacao.h"
 #include "Elemento.h"
+#include "Calculo.h"
 
 void funcFree(char **a){
 	if (a == NULL){
@@ -1051,15 +1052,17 @@ void leitura(int argc, char *argv[], char *arqIn, double *svgH, double *svgW, FI
 			}
 		}else if (strcmp(word, "crb?") == 0){
 			Vector vetor;
+			Elemento e1 = NULL, e2 = NULL;
+			aux = NULL;
 			Posic p;
 			Elemento e;
-			vetor = ltov(listTor, getTorreX, getTorreY);
-			heapSort(vetor, cmp);
-			printf("x:\n");
-			for (i = 1; i<= getSizeVector(vetor); i++){
-				e = getObjVector(vetor, i);
-				printf("%f\n", getElementoX(e));
-			}
+			vetor = ltov(listTor, getTorreX, getTorreY, getTorreId);
+			heapSort(vetor, cmp, 'x');
+			value = lessDistance(vetor, 1, getSizeVector(vetor), &e1, &e2);
+			fprintf(*svgMain, "<circle cx = \"%f\" cy = \"%f\" r = \"6\" fill = \"gray\" stroke=\"black\" stroke-width=\"4\" fill-opacity = \"0.0\" />\n", getElementoX(e1), getElementoY(e1));
+			fprintf(*svgMain, "<circle cx = \"%f\" cy = \"%f\" r = \"6\" fill = \"gray\" stroke=\"black\" stroke-width=\"4\" fill-opacity = \"0.0\" />\n", getElementoX(e2), getElementoY(e2));
+			printf("x1: %f y1: %f x2: %f y2: %f", getElementoX(e1), getElementoY(e1), getElementoX(e2), getElementoY(e2));
+			getchar();
 		}
 	}
 	funcFree(&line);

@@ -41,6 +41,12 @@ int getSizeVector(Vector vet){
 	return newVector->size;
 }
 
+void setSizeVector(Vector vet, int size){
+	head *newVet;
+	newVet = (head*)vet;
+	newVet->size = size;
+}
+
 Item getObjVector(Vector vet, int n){
 	head *cabeca;
 	vector *vetor;
@@ -75,15 +81,17 @@ void swap(Vector vet, int i, int j){
 	vetor[j-1].obj = v.obj;
 }
 
-void freeVector(Vector vet){
+void freeVector(Vector vet, Free func){
 	head *cabeca;
 	vector *vetor;
 	int i;
 	cabeca = (head*)vet;
 	vetor = cabeca->vet;
 	for (i = 0; i < cabeca->size; i++){
+		func(vetor->obj);
 		if (vetor->obj != NULL)
 			free(vetor[i].obj);
 	}
 	free(cabeca);
+	free(vetor);
 }

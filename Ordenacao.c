@@ -1,17 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Ordenacao.h"
 #include "Elemento.h"
 
-Vector ltov(Lista list, Mat matx, Mat maty){
+Vector ltov(Lista list, Mat matx, Mat maty, Str mid){
     int i;
+    char *id;
     Posic p;
     Elemento e;
     Vector vet;
     vet = createVector(length(list));
     p = getFirst(list);
     for (i = 1; i <= length(list); i++){
-        e = createElemento(matx(getObjt(p)), maty(getObjt(p)));
+        id  = (char*)malloc(sizeof(char)*(strlen((mid(getObjt(p)))) + 1));
+        strcpy(id, mid(getObjt(p)));
+        e = createElemento(matx(getObjt(p)), maty(getObjt(p)), id);
         addVector(vet, e, i);
         p = getNext(p);
     }

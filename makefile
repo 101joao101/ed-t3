@@ -1,5 +1,5 @@
-siguel: siguel.o Vector.o Retangulo.o Circulo.o CalculoCirculoRetangulo.o Comandos.o Lista.o Quadra.o Semaforo.o Torre.o Hidrante.o Svg.o Ordenacao.o Elemento.o
-	gcc -o siguel siguel.o Vector.o Circulo.o Retangulo.o CalculoCirculoRetangulo.o Comandos.o Lista.o Quadra.o Semaforo.o Torre.o Hidrante.o Svg.o Ordenacao.o Elemento.o -lm -std=c99 -fstack-protector-all
+siguel: siguel.o Vector.o Retangulo.o Circulo.o CalculoCirculoRetangulo.o Comandos.o Lista.o Quadra.o Semaforo.o Torre.o Hidrante.o Svg.o Ordenacao.o Elemento.o Calculo.o
+	gcc -o siguel siguel.o Vector.o Circulo.o Retangulo.o CalculoCirculoRetangulo.o Comandos.o Lista.o Quadra.o Semaforo.o Torre.o Hidrante.o Svg.o Ordenacao.o Elemento.o Calculo.o -lm -std=c99 -fstack-protector-all
 siguel.o: siguel.c
 	gcc -o siguel.o -c siguel.c -g -std=c99 -fstack-protector-all
 Comandos.o: Comandos.c Comandos.h
@@ -28,5 +28,7 @@ Ordenacao.o: Ordenacao.c Ordenacao.h
 	gcc -o Ordenacao.o -c Ordenacao.c -g -std=c99 -fstack-protector-all
 Elemento.o: Elemento.c Elemento.h
 	gcc -o Elemento.o -c Elemento.c -g -std=c99 -fstack-protector-all
+Calculo.o: Calculo.c Calculo.h
+	gcc -o Calculo.o -c Calculo.c -lm -g -std=c99 -fstack-protector-all
 clear:
 	rm -rf *.o vgcore*

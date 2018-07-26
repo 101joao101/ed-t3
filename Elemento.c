@@ -5,14 +5,21 @@
 typedef struct reg{
     double x;
     double y;
+    char *id;
 }elemento;
 
-Elemento createElemento(double x, double y){
+Elemento createElemento(double x, double y, char *id){
     elemento *new;
     new = (elemento*)malloc(sizeof(elemento));
     new->x = x;
     new->y = y;
+    new->id = id;
     return new;
+}
+
+char *getElementoId(Elemento c){
+    elemento *new = (elemento*)c;
+    return new->id;
 }
 
 double getElementoX(Elemento c){
@@ -44,4 +51,10 @@ int cmp(Vector vet, int i, int j, char p){
         else if (e1->y < e2->y)
             return 1;
     }
+}
+
+void freeElemento(Elemento e){
+    elemento *new = (elemento*)e;
+    if (new->id != NULL)
+        free(new->id);
 }

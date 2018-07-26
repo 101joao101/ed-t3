@@ -6,6 +6,7 @@
 	typedef char *((*Object)(Item));
 
 char *funcIn(int argc, char **argv, char *str);
+char *concatena(char *str1, char *str2);
 void leitura(int argc, char *argv[], char *str, double *svgH, double *svgW, FILE **svgMain, Lista listCir, Lista listRet, Lista listQua, Lista listSem, Lista listHid, Lista listTor);
 void funcFree(char **a);
 char *colocaBarra(char *str);
