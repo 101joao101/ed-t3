@@ -16,7 +16,7 @@ void ver(Elemento *r1, Elemento *r2, Elemento e1, Elemento e2){
     double d1, d2;
     d1 = sqrt(pow((getElementoX(*r1) - getElementoX(*r2)), 2) + pow((getElementoY(*r1) - getElementoY(*r2)), 2));
     d2 = sqrt(pow((getElementoX(e1) - getElementoX(e2)), 2) + pow((getElementoY(e1) - getElementoY(e2)), 2));
-    if (d1 < d2){
+    if (d1 > d2){
         *r1 = e1;
         *r2 = e2;
     }
@@ -25,13 +25,14 @@ void ver(Elemento *r1, Elemento *r2, Elemento e1, Elemento e2){
 double lessDistanceFront(Vector vet, int last, double minDist, Elemento *r1, Elemento *r2){
     int i, j;
     char *aux;
-    Elemento e1, e2;
+    
     double auxd;
     heapSort(vet, cmp, 'y');
-    for(i = 1; i < last; i++){
+
+    for(i = 1; i <= last; i++){
         j = i+1;
         for (; j<=last; j++){
-            if ((getElementoY(getObjVector(vet, i)) - getElementoY(getObjVector(vet, j))) < minDist){
+            if ((getElementoY(getObjVector(vet, j)) - getElementoY(getObjVector(vet, i))) < minDist){
                 auxd = sqrt(pow((getElementoX(getObjVector(vet, i)) - getElementoX(getObjVector(vet, j))), 2) + pow((getElementoY(getObjVector(vet, i)) - getElementoY(getObjVector(vet, j))), 2));
                 if (auxd < minDist){
                     minDist = auxd;
@@ -44,15 +45,35 @@ double lessDistanceFront(Vector vet, int last, double minDist, Elemento *r1, Ele
 }
 
 double lessDistThree(Vector vet, int first, int last, Elemento *r1, Elemento *r2){
-    double d1, d2, d3, daux;
+    double d1, resp, d3, daux, d2;
     char *aux;
     int size, i, j;
     Elemento e1, e2, e3;
+    resp = -1.0;
+
+    for (i = 1; i<=last; i++){
+        for(j = i+1; j<=last; j++){
+            d1 = sqrt(pow((getElementoX(getObjVector(vet, i)) - getElementoX(getObjVector(vet, j))), 2) + pow((getElementoY(getObjVector(vet, i)) - getElementoY(getObjVector(vet, j))), 2));
+            if (resp < 0){
+                resp = d1;
+                if (*r1 == NULL && *r2 == NULL){
+                    *r1 = getObjVector(vet, j);
+                    *r2 = getObjVector(vet, i);
+                } else
+                    ver(r1, r2, getObjVector(vet, j), getObjVector(vet, i));
+            }else if (d1 < resp){
+                resp = d1;
+                ver(r1, r2, getObjVector(vet, j), getObjVector(vet, i));
+            }
+        }
+    }
+    return resp;
+/*
     e1 = getObjVector(vet, first);
     i = first + 1;
     e2 = getObjVector(vet, i);
     d1 = sqrt(pow((getElementoX(e1) - getElementoX(e2)), 2) + pow((getElementoY(e1) - getElementoY(e2)), 2));
-    if (last - first == 2){
+    if (last - first == 1){
         if (*r1 == NULL && *r2 == NULL){
             *r1 = getObjVector(vet, first);
             *r2 = getObjVector(vet, i);
@@ -64,6 +85,9 @@ double lessDistThree(Vector vet, int first, int last, Elemento *r1, Elemento *r2
         e3 = getObjVector(vet, j);
         d2 = sqrt(pow((getElementoX(e1) - getElementoX(e3)), 2) + pow((getElementoY(e1) - getElementoY(e3)), 2));
         d3 = sqrt(pow((getElementoX(e3) - getElementoX(e2)), 2) + pow((getElementoY(e3) - getElementoY(e2)), 2));
+    //    printf("2d1: %f\n", d1);
+  //      printf("2d2: %f\n", d2);
+//        printf("2d3: %f\n", d3);
         if (d1 < d2 && d1 < d3){
             if (*r1 == NULL && *r2 == NULL){
                 *r1 = getObjVector(vet, first);
@@ -86,7 +110,7 @@ double lessDistThree(Vector vet, int first, int last, Elemento *r1, Elemento *r2
                 ver(r1, r2, e2, e3);
             return d3;
         }
-    }
+    }*/
 }
 
 double lessDistance(Vector vet, int first, int last, Elemento *r1, Elemento *r2){
@@ -95,18 +119,19 @@ double lessDistance(Vector vet, int first, int last, Elemento *r1, Elemento *r2)
     int m, i, j;
     if (last <= 3){
         resp = lessDistThree(vet, first, last, r1, r2); 
+    //    printf("resp: %f\n", resp);
+      //  getchar();
         return resp;
     }
     m = last/2;
     dl = lessDistance(vet, first, m, r1, r2);
-    
     dr = lessDistance(vet, first + m, last - m, r1, r2);
     d = min(dl, dr);
     aux = createVector(getSizeVector(vet));
-    midx = getElementoX(getObjVector(vet, m));
+    midx = getElementoX(getObjVector(vet, m+1));
 
     for (i = 1, j = 0; i <= last; i++){
-        a = getElementoX(getObjVector(vet, i));
+        a = getElementoX(getObjVector(vet, i)) - midx;
         if (a < 0)
             a *= -1;
         if (a < d){

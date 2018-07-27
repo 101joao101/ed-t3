@@ -15,7 +15,7 @@ void printSvgRetangulo(FILE **svg, Retangulo r){
 void printSvgQuadra(FILE **svg, Quadra q){
 	fprintf(*svg, "<rect x=\"%f\" y=\"%f\" width=\"%f\" height=\"%f\" fill=\"%s\" stroke=\"%s\" stroke-width=\"1\" fill-opacity = \"0.65\"/>\n", 
 	getQuadraX(q), getQuadraY(q), getQuadraWidth(q), getQuadraHeight(q), getQuadraCorPreenchimento(q), getQuadraCorContorno(q));
-	fprintf(*svg, "<text x=\"%f\" y=\"%f\" font-family= \"Verdana\"  font-size=\"3\">%s</text>\n", (getQuadraX(q) + getQuadraWidth(q)/2), (getQuadraY(q)+ getQuadraHeight(q)/2), getQuadraCep(q));
+	fprintf(*svg, "<text x=\"%f\" y=\"%f\" font-family= \"Verdana\"  font-size=\"3\">%s</text>\n", getQuadraX(q), getQuadraY(q), getQuadraCep(q));
 }
 void printSvgHidrante(FILE **svg, Hidrante h){
 	double x, y;
@@ -28,10 +28,10 @@ void printSvgHidrante(FILE **svg, Hidrante h){
 void printSvgTorre(FILE **svg, Torre t){
 	double x, y;
 	fprintf(*svg, "<circle cx = \"%f\" cy = \"%f\" r = \"%f\" fill = \"%s\" stroke=\"%s\" stroke-width=\"1\" fill-opacity = \"0.65\"/>\n",
-	getTorreX(t), getTorreY(t), 3.0, getTorreCorPreenchimento(t), getTorreCorContorno(t));
-	x = getTorreX(t) - 3*sqrt(2)/2;
-	y = getTorreY(t) + 3*sqrt(2)/2;
-	fprintf(*svg, "<text x=\"%f\" y=\"%f\" font-family= \"Verdana\"  font-size=\"5\">T</text>\n", x, y);
+	getTorreX(t), getTorreY(t), 50.0, getTorreCorPreenchimento(t), getTorreCorContorno(t));
+	x = getTorreX(t) - 40;//*sqrt(2)/2;
+	y = getTorreY(t) + 40;//*sqrt(2)/2;
+	fprintf(*svg, "<text x=\"%f\" y=\"%f\" font-family= \"Verdana\"  font-size=\"108\">T</text>\n", x, y);
 }
 void printSvgSemaforo(FILE **svg, Semaforo s){
 	fprintf(*svg, "<rect x=\"%f\" y=\"%f\" width=\"%f\" height=\"%f\" fill=\"%s\" stroke=\"%s\" stroke-width=\"1\" fill-opacity = \"0.65\"/>\n",
