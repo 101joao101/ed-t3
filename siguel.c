@@ -72,8 +72,7 @@ int main (int argc, char **argv){
 		fprintf(svgQry, "                                                                          ");
 		leitura(argc, argv, str, &svgH, &svgW, &svgQry, listCir, listRet, listQua, listSem, listHid, listTor);
 		funcFree(&str);
-		printSvgList(&svgQry, listTor, printSvgTorre);
-		//writeSvg(&svgQry, listCir, listRet, listSem, listQua, listTor, listHid);
+		writeSvg(&svgQry, listCir, listRet, listSem, listQua, listTor, listHid);
 		fprintf(svgQry, "</svg>");
 		rewind(svgQry);
 		svgH += 10.0;

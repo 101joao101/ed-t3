@@ -88,9 +88,11 @@ void freeVector(Vector vet, Free func){
 	cabeca = (head*)vet;
 	vetor = cabeca->vet;
 	for (i = 0; i < cabeca->size; i++){
-		func(vetor->obj);
-		if (vetor->obj != NULL)
+		func(vetor[i].obj);
+		if (vetor[i].obj != NULL){
 			free(vetor[i].obj);
+			cabeca->size--;
+		}
 	}
 	free(cabeca);
 	free(vetor);

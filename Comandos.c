@@ -1061,8 +1061,6 @@ void leitura(int argc, char *argv[], char *arqIn, double *svgH, double *svgW, FI
 			value = lessDistance(vetor, 1, getSizeVector(vetor), &e1, &e2);
 			fprintf(*svgMain, "<circle cx = \"%f\" cy = \"%f\" r = \"120\" fill = \"gray\" stroke=\"red\" stroke-width=\"15\" fill-opacity = \"0.0\" />\n", getElementoX(e1), getElementoY(e1));
 			fprintf(*svgMain, "<circle cx = \"%f\" cy = \"%f\" r = \"120\" fill = \"gray\" stroke=\"red\" stroke-width=\"15\" fill-opacity = \"0.0\" />\n", getElementoX(e2), getElementoY(e2));
-		//	printf("x1: %f y1: %f x2: %f y2: %f, value: %f\n", getElementoX(e1), getElementoY(e1), getElementoX(e2), getElementoY(e2), value);
-		
 		}
 	}
 	funcFree(&line);

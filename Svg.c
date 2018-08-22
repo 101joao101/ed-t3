@@ -28,15 +28,15 @@ void printSvgHidrante(FILE **svg, Hidrante h){
 void printSvgTorre(FILE **svg, Torre t){
 	double x, y;
 	fprintf(*svg, "<circle cx = \"%f\" cy = \"%f\" r = \"%f\" fill = \"%s\" stroke=\"%s\" stroke-width=\"1\" fill-opacity = \"0.65\"/>\n",
-	getTorreX(t), getTorreY(t), 50.0, getTorreCorPreenchimento(t), getTorreCorContorno(t));
-	x = getTorreX(t) - 40;//*sqrt(2)/2;
-	y = getTorreY(t) + 40;//*sqrt(2)/2;
-	fprintf(*svg, "<text x=\"%f\" y=\"%f\" font-family= \"Verdana\"  font-size=\"108\">T</text>\n", x, y);
+	getTorreX(t), getTorreY(t), 20.0, getTorreCorPreenchimento(t), getTorreCorContorno(t));
+	x = getTorreX(t) - 15;
+	y = getTorreY(t) + 20;
+	fprintf(*svg, "<text x=\"%f\" y=\"%f\" font-family= \"Verdana\"  font-size=\"45\">T</text>\n", x, y);
 }
 void printSvgSemaforo(FILE **svg, Semaforo s){
 	fprintf(*svg, "<rect x=\"%f\" y=\"%f\" width=\"%f\" height=\"%f\" fill=\"%s\" stroke=\"%s\" stroke-width=\"1\" fill-opacity = \"0.65\"/>\n",
-	getSemaforoX(s), getSemaforoY(s), 3.0, 3.0, getSemaforoCorPreenchimento(s), getSemaforoCorContorno(s));
-	fprintf(*svg, "<text x=\"%f\" y=\"%f\" font-family= \"Verdana\"  font-size=\"3\">S</text>\n", getSemaforoX(s), getSemaforoY(s)+3.0);
+	getSemaforoX(s), getSemaforoY(s) - 5, 10.0, 18.0, getSemaforoCorPreenchimento(s), getSemaforoCorContorno(s));
+	fprintf(*svg, "<text x=\"%f\" y=\"%f\" font-family= \"Verdana\"  font-size=\"7\">S</text>\n", getSemaforoX(s), getSemaforoY(s)+3.0);
 }
 
 void printSvgLine(FILE **svg, double x1, double y1, double x2, double y2){

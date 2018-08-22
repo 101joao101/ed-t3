@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include "Calculo.h"
 #include "Ordenacao.h"
+#include <string.h>
 #include <math.h>
 #include "Elemento.h"
 #include "Comandos.h"
+#include <stdlib.h>
 
 double min(double a, double b){
     if(a < b)
@@ -14,7 +16,10 @@ double min(double a, double b){
 
 void ver(Elemento *r1, Elemento *r2, Elemento e1, Elemento e2){
     double d1, d2;
-    d1 = sqrt(pow((getElementoX(*r1) - getElementoX(*r2)), 2) + pow((getElementoY(*r1) - getElementoY(*r2)), 2));
+    d1 = sqrt(pow((getElementoX(*r1) - 
+    getElementoX(*r2)), 2) + 
+    pow((getElementoY(*r1) - 
+     getElementoY(*r2)), 2));
     d2 = sqrt(pow((getElementoX(e1) - getElementoX(e2)), 2) + pow((getElementoY(e1) - getElementoY(e2)), 2));
     if (d1 > d2){
         *r1 = e1;
@@ -68,54 +73,13 @@ double lessDistThree(Vector vet, int first, int last, Elemento *r1, Elemento *r2
         }
     }
     return resp;
-/*
-    e1 = getObjVector(vet, first);
-    i = first + 1;
-    e2 = getObjVector(vet, i);
-    d1 = sqrt(pow((getElementoX(e1) - getElementoX(e2)), 2) + pow((getElementoY(e1) - getElementoY(e2)), 2));
-    if (last - first == 1){
-        if (*r1 == NULL && *r2 == NULL){
-            *r1 = getObjVector(vet, first);
-            *r2 = getObjVector(vet, i);
-        }
-        ver(r1, r2, e1, e2);
-        return d1;
-    }else{
-        j = first + 2;
-        e3 = getObjVector(vet, j);
-        d2 = sqrt(pow((getElementoX(e1) - getElementoX(e3)), 2) + pow((getElementoY(e1) - getElementoY(e3)), 2));
-        d3 = sqrt(pow((getElementoX(e3) - getElementoX(e2)), 2) + pow((getElementoY(e3) - getElementoY(e2)), 2));
-    //    printf("2d1: %f\n", d1);
-  //      printf("2d2: %f\n", d2);
-//        printf("2d3: %f\n", d3);
-        if (d1 < d2 && d1 < d3){
-            if (*r1 == NULL && *r2 == NULL){
-                *r1 = getObjVector(vet, first);
-                *r2 = getObjVector(vet, i);                
-            } else
-                ver(r1, r2, e1, e2);
-            return d1;
-        } else if (d2 < d1 && d2 < d3){
-            if (*r1 == NULL && *r2 == NULL){
-                *r1 = getObjVector(vet, first);
-                *r2 = getObjVector(vet, j);
-            } else
-                ver(r1, r2, e1, e3);
-            return d2;
-        } else{
-            if (*r1 == NULL && *r2 == NULL){
-                *r1 = getObjVector(vet, i);
-                *r2 = getObjVector(vet, j);
-            } else
-                ver(r1, r2, e2, e3);
-            return d3;
-        }
-    }*/
 }
 
 double lessDistance(Vector vet, int first, int last, Elemento *r1, Elemento *r2){
     Vector aux;
+    char *str;
     double dl, dr, d, midx, mf, a, resp;
+    Elemento e1;
     int m, i, j;
     if (last <= 3){
         resp = lessDistThree(vet, first, last, r1, r2); 
@@ -136,11 +100,15 @@ double lessDistance(Vector vet, int first, int last, Elemento *r1, Elemento *r2)
             a *= -1;
         if (a < d){
             j++;
-            addVector(aux, (Item)getObjVector(vet, i), j);
+            str = (char*)malloc(sizeof(char)*(strlen(getElementoId((Item)getObjVector(vet, i))) + 1));
+            strcpy(str, getElementoId((Item)getObjVector(vet, i)));
+            e1 = createElemento(getElementoX((Item)getObjVector(vet, i)), getElementoY((Item)getObjVector(vet, i)), str);
+            addVector(aux, e1, j);
         }
     }
     setSizeVector(aux, j);
     mf = lessDistanceFront(aux, j, d, r1, r2);
+    //freeVector(aux, freeElemento);
     return min(mf, d);
 }
 

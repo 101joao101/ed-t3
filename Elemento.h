@@ -9,5 +9,6 @@ char *getElementoId(Elemento c);
 double getElementoX(Elemento c);
 double getElementoY(Elemento c);
 int cmp(Vector vet, int i, int j, char p);
+void freeElemento(Elemento e);
 
 #endif
