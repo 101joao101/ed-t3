@@ -78,13 +78,11 @@ double lessDistThree(Vector vet, int first, int last, Elemento *r1, Elemento *r2
 double lessDistance(Vector vet, int first, int last, Elemento *r1, Elemento *r2){
     Vector aux;
     char *str;
-    double dl, dr, d, midx, mf, a, resp;
+    double dl, dr, d, midx, mf, a, resp, x, y;
     Elemento e1;
     int m, i, j;
     if (last <= 3){
         resp = lessDistThree(vet, first, last, r1, r2); 
-    //    printf("resp: %f\n", resp);
-      //  getchar();
         return resp;
     }
     m = last/2;
@@ -102,13 +100,14 @@ double lessDistance(Vector vet, int first, int last, Elemento *r1, Elemento *r2)
             j++;
             str = (char*)malloc(sizeof(char)*(strlen(getElementoId((Item)getObjVector(vet, i))) + 1));
             strcpy(str, getElementoId((Item)getObjVector(vet, i)));
-            e1 = createElemento(getElementoX((Item)getObjVector(vet, i)), getElementoY((Item)getObjVector(vet, i)), str);
+            x = getElementoX((Item)getObjVector(vet, i));
+            y = getElementoY((Item)getObjVector(vet, i));
+            e1 = createElemento(x, y, str);
             addVector(aux, e1, j);
         }
     }
-    setSizeVector(aux, j);
+    setSizeVector(aux, j);  
     mf = lessDistanceFront(aux, j, d, r1, r2);
-    //freeVector(aux, freeElemento);
     return min(mf, d);
 }
 

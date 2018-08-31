@@ -606,7 +606,6 @@ void leitura(int argc, char *argv[], char *arqIn, double *svgH, double *svgW, FI
 			if (p2 == NULL)
 				p2 = searchObjId(listCir, listRet, j);
 			tipo2 = typeObj(listCir, listRet, j);
-			//printf("t1: %d t2: %d\n", tipo1, tipo2);
 			if (tipo1 == 0){
 				if (tipo2 == 0){
 					r1 = (Retangulo)getObjt(p1);
@@ -877,7 +876,6 @@ void leitura(int argc, char *argv[], char *arqIn, double *svgH, double *svgW, FI
 					i--;
 				}
 			}
-			//printSvgRetangulo(svgMain, r1);
 			funcFree(&aux);
 			funcFree(&aux2);
 			if (r1 != NULL)
@@ -1000,25 +998,21 @@ void leitura(int argc, char *argv[], char *arqIn, double *svgH, double *svgW, FI
 							s1 = (Semaforo)getObjt(p1);
 							setSemaforoCorContorno(s1, aux);
 							setSemaforoCorPreenchimento(s1, aux2);
-							//printf("Sem -> c1: %s c2: %s\n", getSemaforoCorPreenchimento(s1), getSemaforoCorContorno(s1));
 						}
 					}else{
 						h1 = (Hidrante)getObjt(p1);
 						setHidranteCorContorno(h1, aux);
 						setHidranteCorPreenchimento(h1, aux2);
-						//printf("Hidrante -> c1: %s c2: %s\n", getHidranteCorPreenchimento(h1), getHidranteCorContorno(h1));
 					}
 				} else{
 					t1 = (Torre)getObjt(p1);
 					setTorreCorPreenchimento(t1, aux2);
 					setTorreCorContorno(t1, aux);
-					//printf("Torre -> c1: %s c2: %s\n", getTorreCorPreenchimento(t1), getTorreCorContorno(t1));
 				}
 			} else{
 				q1 = (Quadra)getObjt(p1);
 				setQuadraCorContorno(q1, aux);
 				setQuadraCorPreenchimento(q1, aux2);
-				//printf("Quadra -> c1: %s c2: %s\n", getQuadraCorPreenchimento(q1), getQuadraCorContorno(q1));
 			}
 		}else if (strcmp(word, "crd?") == 0){
 			sscanf(line, "%s %s", word, cep);
@@ -1061,6 +1055,7 @@ void leitura(int argc, char *argv[], char *arqIn, double *svgH, double *svgW, FI
 			value = lessDistance(vetor, 1, getSizeVector(vetor), &e1, &e2);
 			fprintf(*svgMain, "<circle cx = \"%f\" cy = \"%f\" r = \"120\" fill = \"gray\" stroke=\"red\" stroke-width=\"15\" fill-opacity = \"0.0\" />\n", getElementoX(e1), getElementoY(e1));
 			fprintf(*svgMain, "<circle cx = \"%f\" cy = \"%f\" r = \"120\" fill = \"gray\" stroke=\"red\" stroke-width=\"15\" fill-opacity = \"0.0\" />\n", getElementoX(e2), getElementoY(e2));
+			freeVector(vetor, freeElemento);
 		}
 	}
 	funcFree(&line);

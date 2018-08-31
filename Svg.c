@@ -35,7 +35,7 @@ void printSvgTorre(FILE **svg, Torre t){
 }
 void printSvgSemaforo(FILE **svg, Semaforo s){
 	fprintf(*svg, "<rect x=\"%f\" y=\"%f\" width=\"%f\" height=\"%f\" fill=\"%s\" stroke=\"%s\" stroke-width=\"1\" fill-opacity = \"0.65\"/>\n",
-	getSemaforoX(s), getSemaforoY(s) - 5, 10.0, 18.0, getSemaforoCorPreenchimento(s), getSemaforoCorContorno(s));
+	getSemaforoX(s) - 5, getSemaforoY(s) - 5, 10.0, 18.0, getSemaforoCorPreenchimento(s), getSemaforoCorContorno(s));
 	fprintf(*svg, "<text x=\"%f\" y=\"%f\" font-family= \"Verdana\"  font-size=\"7\">S</text>\n", getSemaforoX(s), getSemaforoY(s)+3.0);
 }
 

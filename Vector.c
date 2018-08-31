@@ -81,6 +81,15 @@ void swap(Vector vet, int i, int j){
 	vetor[j-1].obj = v.obj;
 }
 
+void freeTopo(Vector vet){
+	head *cabeca = (head*)vet;
+	vector *vetor = cabeca->vet;
+	if (cabeca != NULL)
+		free(cabeca);
+	if (vetor != NULL)
+		free(vetor);
+}
+
 void freeVector(Vector vet, Free func){
 	head *cabeca;
 	vector *vetor;
@@ -94,6 +103,5 @@ void freeVector(Vector vet, Free func){
 			cabeca->size--;
 		}
 	}
-	free(cabeca);
-	free(vetor);
+	freeTopo(vet);
 }

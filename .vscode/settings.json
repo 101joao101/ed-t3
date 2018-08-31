@@ -5,6 +5,7 @@
         "vector.h": "c",
         "elemento.h": "c",
         "comandos.h": "c",
-        "cmath": "c"
+        "cmath": "c",
+        "retangulo.h": "c"
     }
 }
